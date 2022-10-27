@@ -298,7 +298,7 @@ func (ms *ModbusServer) acceptTCPClients() {
 
 		ms.lock.Lock()
 		// apply a connection limit
-		if uint(len(ms.tcpClients)) < ms.conf.MaxClients {
+		if ms.started && uint(len(ms.tcpClients)) < ms.conf.MaxClients {
 			accepted	= true
 			// add the new client connection to the pool
 			ms.tcpClients	= append(ms.tcpClients, sock)
